@@ -67,7 +67,7 @@ function onListening() {
  */
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
-.
+
 app.get("/api", (req, res) => {
   console.log(req.body);
   return res.status(200).send();
