@@ -3,7 +3,10 @@ const express = require("express");
 const http = require("http");
 const app = express();
 
-app.set("port", 3000);
+const port = 3000;
+
+app.set("port", port);
+
 /**
  * Create HTTP server
  */
@@ -12,7 +15,7 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(3000);
+server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 /**
@@ -67,6 +70,7 @@ function onListening() {
  */
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
+const apiV1 = require("./routes/index");
 
 app.get("/api", (req, res) => {
   console.log(req.body);
@@ -77,3 +81,6 @@ app.post("/api", jsonParser, (req, res) => {
   console.log(req.body);
   return res.status(200).send();
 });
+
+app.use("/api/v1", apiV1.router);
+
